@@ -1,12 +1,12 @@
 Model {
-  Name			  "helikopter"
+  Name			  "helikopter03"
   Version		  7.5
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.47"
+    ComputedModelVersion    "1.51"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,11 +25,11 @@ Model {
   Creator		  "Administrator"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "jesmanim"
+  LastModifiedBy	  "olenl"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Feb 07 17:09:33 2015"
-  RTWModifiedTimeStamp	  345218076
-  ModelVersionFormat	  "1.%<AutoIncrement:47>"
+  LastModifiedDate	  "Wed Feb 25 17:54:36 2015"
+  RTWModifiedTimeStamp	  346786554
+  ModelVersionFormat	  "1.%<AutoIncrement:51>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -759,6 +759,14 @@ Model {
       BusSelectionMode	      off
     }
     Block {
+      BlockType		      FromWorkspace
+      VariableName	      "simulink_input"
+      SampleTime	      "-1"
+      Interpolate	      on
+      ZeroCross		      off
+      OutputAfterFinalValue   "Extrapolation"
+    }
+    Block {
       BlockType		      Gain
       Gain		      "1"
       Multiplication	      "Element-wise(K.*u)"
@@ -939,8 +947,8 @@ Model {
     }
   }
   System {
-    Name		    "helikopter"
-    Location		    [816, 289, 1909, 904]
+    Name		    "helikopter03"
+    Location		    [738, 172, 1831, 787]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -954,7 +962,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    71
+    SIDHighWatermark	    73
     Block {
       BlockType		      Sum
       Name		      "Add"
@@ -1179,7 +1187,7 @@ Model {
       Ports		      [1]
       Position		      [855, 339, 885, 371]
       Floating		      off
-      Location		      [92, 664, 416, 903]
+      Location		      [76, 451, 400, 690]
       Open		      off
       NumInputPorts	      "1"
       List {
@@ -1190,6 +1198,15 @@ Model {
       SaveName		      "ScopeData1"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
+    }
+    Block {
+      BlockType		      FromWorkspace
+      Name		      "From\nWorkspace"
+      SID		      72
+      Position		      [215, 83, 280, 107]
+      VariableName	      "kokkosnott"
+      SampleTime	      "0"
+      ZeroCross		      on
     }
     Block {
       BlockType		      Gain
@@ -1988,7 +2005,7 @@ Model {
       Ports		      [1]
       Position		      [975, 114, 1005, 146]
       Floating		      off
-      Location		      [187, 390, 511, 629]
+      Location		      [1, 48, 1921, 1039]
       Open		      off
       NumInputPorts	      "1"
       List {
@@ -1996,8 +2013,8 @@ Model {
 	axes1			"%<SignalLabel>"
       }
       TimeRange		      "10"
-      YMin		      "-1"
-      YMax		      "1"
+      YMin		      "-720"
+      YMax		      "720"
       SaveName		      "ScopeData3"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
@@ -2156,13 +2173,24 @@ Model {
       OutScaling	      "2^0"
     }
     Block {
-      BlockType		      Constant
-      Name		      "pitch"
-      SID		      67
-      Position		      [285, 140, 315, 170]
-      Value		      "0*pi/180"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
+      BlockType		      Scope
+      Name		      "u"
+      SID		      73
+      Ports		      [1]
+      Position		      [385, 74, 415, 106]
+      Floating		      off
+      Location		      [1, 48, 1921, 1039]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      YMin		      "-2"
+      YMax		      "2"
+      SaveName		      "ScopeData4"
+      DataFormat	      "StructureWithTime"
+      SampleTime	      "0"
     }
     Line {
       SrcBlock		      "Pitch-kontroller"
@@ -2245,10 +2273,19 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "pitch"
+      SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      DstBlock		      "Pitch-kontroller"
-      DstPort		      1
+      Points		      [35, 0]
+      Branch {
+	Points			[0, 60]
+	DstBlock		"Pitch-kontroller"
+	DstPort			1
+      }
+      Branch {
+	Points			[50, 0]
+	DstBlock		"u"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "Demux"

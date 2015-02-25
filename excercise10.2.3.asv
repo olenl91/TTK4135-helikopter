@@ -1,0 +1,56 @@
+T = 0.25;
+q = 0.1;
+N = 100;
+
+A_c = [ 0   1   0           0;
+        0   0   -K_2        0;
+        0   0   0           1;
+        0   0   -K_1*K_pp   -K_1*K_pd  ];
+    
+B_c = [ 0;
+        0;
+        0;
+        K_1*K_pp];
+    
+A = A_c*T + eye(4);
+B = B_c*T;
+
+lambda_0 = pi;
+r = 0;
+p = 0;
+p_dot = 0;
+
+
+
+G1 = [1, 0, 0, 0;
+    0, 0, 0, 0;
+    0, 0, q, 0;
+    0, 0, 0, 0];
+
+
+P1 = 0;                                
+G = 2*genq2(G1,P1,N,N,1);             
+c = zeros(N*(size(A, 2) + size(B, 2)) ,1);                 
+
+lowerBound = [
+    repmat([-Inf; -Inf; -pi/6; -Inf], N, 1);
+    repmat([-Inf], N, 1)];
+
+upperBound = [
+    repmat([Inf; Inf; pi/6; Inf], N, 1);
+    repmat([Inf], N, 1)];
+
+
+    
+A_ieq = zeros(N, N);
+b_ieq = zeros(N*(size(A, 2) + size(B, 2), 1);
+
+A_eq = gena2(A, B, N, size(1, 2, 1)
+b_eq = 
+    
+quadprog(G, c, A_ieq, b_ieq, Aeq, beq, lowerBound, upperBound);
+
+
+p[0] = [0];
+
+
