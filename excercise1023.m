@@ -30,7 +30,7 @@ G1 = [1, 0, 0, 0;
     0, 0, 0, 0;
     0, 0, q, 0;
     0, 0, 0, 0];
-P1 = 0;                                
+P1 = q;                                
 G = 2*genq2(G1,P1,N,N,1);             
 c = zeros(N*(size(A, 2) + size(B, 2)) ,1);                 
 
@@ -80,6 +80,8 @@ M = N;
 
 u  = [z(N*mx+1:N*mx+M*mu);z(N*mx+M*mu)]; % Control input from solution
 
+length(u)
+
 
 x1 = [x0(1);z(1:mx:N*mx)];              % State x1 from solution
 x2 = [x0(2);z(2:mx:N*mx)];              % State x2 from solution
@@ -115,8 +117,14 @@ subplot(515)
 plot(t,x4),grid
 xlabel('tid (s)'),ylabel('pdot')
 
+    
+Nuller = zeros(Antall,4);
+optimal_trajectory_data = [x1,x2,x3, x4];
 
+optimal_trajectory.time = t;
+optimal_trajectory.signals.values = optimal_trajectory_data;
+optimal_trajectory.signals.dimension = 141;
 
-kokkosnott.time = t;
-kokkosnott.signals.values = u;
-kokkosnott.signals.dimension = 141;
+p_c.time = t;
+p_c.signals.values = u;
+p_c.signals.dimension = 141;

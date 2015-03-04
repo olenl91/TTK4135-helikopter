@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter03.mdl".
  *
- * Model version              : 1.50
+ * Model version              : 1.56
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Wed Feb 25 17:50:09 2015
+ * C source code generated on : Wed Mar 04 16:57:08 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -60,6 +60,10 @@
 
 /* A global buffer for storing error messages (defined in quanser_common library) */
 EXTERN char _rt_error_message[512];
+int_T rt_WriteMat4FileHeader(FILE *fp,
+  int32_T m,
+  int32_T n,
+  const char_T *name);
 
 /* private model entry point functions */
 extern void helikopter03_derivatives(void);

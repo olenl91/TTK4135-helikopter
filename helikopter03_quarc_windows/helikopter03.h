@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter03.mdl".
  *
- * Model version              : 1.50
+ * Model version              : 1.56
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Wed Feb 25 17:50:09 2015
+ * C source code generated on : Wed Mar 04 16:57:08 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -17,6 +17,8 @@
 #define RTW_HEADER_helikopter03_h_
 #ifndef helikopter03_COMMON_INCLUDES_
 # define helikopter03_COMMON_INCLUDES_
+#include <stdio.h>
+#include <stddef.h>
 #include <math.h>
 #include <string.h>
 #include "rtwtypes.h"
@@ -785,6 +787,7 @@ typedef struct {
   real_T Add;                          /* '<Root>/Add' */
   real_T KalibrerPitch;                /* '<S2>/Kalibrer-Pitch' */
   real_T VandringLavpass;              /* '<S2>/Vandring Lavpass' */
+  real_T Add1;                         /* '<Root>/Add1' */
   real_T FromWorkspace;                /* '<Root>/From Workspace' */
   real_T KalibrerVandring;             /* '<S2>/Kalibrer -Vandring' */
   real_T K_ei;                         /* '<S1>/K_ei' */
@@ -811,12 +814,12 @@ typedef struct {
   } Pitch_PWORK;                       /* '<Root>/Pitch' */
 
   struct {
-    void *LoggedData;
-  } ToWorkspace_PWORK;                 /* '<Root>/To Workspace' */
+    void *FilePtr;
+  } ToFile_PWORK;                      /* '<Root>/To File' */
 
   struct {
-    void *LoggedData;
-  } ToWorkspace1_PWORK;                /* '<Root>/To Workspace1' */
+    void *FilePtr;
+  } ToFile1_PWORK;                     /* '<Root>/To File1' */
 
   struct {
     void *LoggedData;
@@ -857,6 +860,16 @@ typedef struct {
   int32_T HILInitialize_InitialEICounts[4];/* '<Root>/HIL Initialize' */
   int32_T HILReadEncoder_Buffer[3];    /* '<S2>/HIL Read Encoder' */
   t_card HILInitialize_Card;           /* '<Root>/HIL Initialize' */
+  struct {
+    int_T Count;
+    int_T Decimation;
+  } ToFile_IWORK;                      /* '<Root>/To File' */
+
+  struct {
+    int_T Count;
+    int_T Decimation;
+  } ToFile1_IWORK;                     /* '<Root>/To File1' */
+
   struct {
     int_T PrevIndex;
   } FromWorkspace_IWORK;               /* '<Root>/From Workspace' */
@@ -967,6 +980,9 @@ struct Parameters_helikopter03_ {
                                         */
   real_T KalibrerPitch_Gain;           /* Expression: KalibPitch
                                         * Referenced by: '<S2>/Kalibrer-Pitch'
+                                        */
+  real_T Constant1_Value;              /* Expression: 180
+                                        * Referenced by: '<Root>/Constant1'
                                         */
   real_T VandringLavpass_A;            /* Computed Parameter: VandringLavpass_A
                                         * Referenced by: '<S2>/Vandring Lavpass'

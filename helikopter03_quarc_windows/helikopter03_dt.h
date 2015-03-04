@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter03.mdl".
  *
- * Model version              : 1.50
+ * Model version              : 1.56
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Wed Feb 25 17:50:09 2015
+ * C source code generated on : Wed Mar 04 16:57:08 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -56,7 +56,7 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&helikopter03_B.KalibrerElev), 0, 0, 9 }
+  { (char_T *)(&helikopter03_B.KalibrerElev), 0, 0, 10 }
   ,
 
   { (char_T *)(&helikopter03_DWork.HILInitialize_AIMinimums[0]), 0, 0, 26 },
@@ -67,7 +67,7 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)(&helikopter03_DWork.HILInitialize_Card), 14, 0, 1 },
 
-  { (char_T *)(&helikopter03_DWork.FromWorkspace_IWORK.PrevIndex), 10, 0, 1 }
+  { (char_T *)(&helikopter03_DWork.ToFile_IWORK.Count), 10, 0, 3 }
 };
 
 /* data type transition table for block I/O structure */
@@ -78,7 +78,7 @@ static DataTypeTransitionTable rtBTransTable = {
 
 /* data type transitions for Parameters structure */
 static DataTypeTransition rtPTransitions[] = {
-  { (char_T *)(&helikopter03_P.HILInitialize_OOStart), 0, 0, 86 },
+  { (char_T *)(&helikopter03_P.HILInitialize_OOStart), 0, 0, 87 },
 
   { (char_T *)(&helikopter03_P.HILInitialize_CKChannels[0]), 6, 0, 7 },
 

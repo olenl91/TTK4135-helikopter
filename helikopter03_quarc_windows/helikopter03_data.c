@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter03.mdl".
  *
- * Model version              : 1.50
+ * Model version              : 1.56
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Wed Feb 25 17:50:09 2015
+ * C source code generated on : Wed Mar 04 16:57:08 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -75,6 +75,9 @@ Parameters_helikopter03 helikopter03_P = {
                                         */
   0.0879,                              /* Expression: KalibPitch
                                         * Referenced by: '<S2>/Kalibrer-Pitch'
+                                        */
+  180.0,                               /* Expression: 180
+                                        * Referenced by: '<Root>/Constant1'
                                         */
   -50.0,                               /* Computed Parameter: VandringLavpass_A
                                         * Referenced by: '<S2>/Vandring Lavpass'
