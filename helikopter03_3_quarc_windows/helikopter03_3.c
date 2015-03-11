@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter03_3.mdl".
  *
- * Model version              : 1.64
+ * Model version              : 1.65
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Wed Mar 04 16:41:38 2015
+ * C source code generated on : Wed Mar 11 13:45:33 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -651,10 +651,10 @@ void helikopter03_3_initialize(boolean_T firstTime)
   helikopter03_3_M->Timing.stepSize1 = 0.001;
 
   /* external mode info */
-  helikopter03_3_M->Sizes.checksums[0] = (678985645U);
-  helikopter03_3_M->Sizes.checksums[1] = (561742273U);
-  helikopter03_3_M->Sizes.checksums[2] = (3765221545U);
-  helikopter03_3_M->Sizes.checksums[3] = (1163615554U);
+  helikopter03_3_M->Sizes.checksums[0] = (1716450638U);
+  helikopter03_3_M->Sizes.checksums[1] = (4049184220U);
+  helikopter03_3_M->Sizes.checksums[2] = (3584576870U);
+  helikopter03_3_M->Sizes.checksums[3] = (4028520719U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;

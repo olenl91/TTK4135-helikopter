@@ -1,3 +1,5 @@
+
+
 function A = gena2(A1,B1,N,mx,mu)
 
 % Funksjon for aa bygge opp A-matrisa som brukes i QP-problemet 
