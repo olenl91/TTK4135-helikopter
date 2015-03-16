@@ -1,3 +1,4 @@
+init03
 clc
 
 %exercise 10.4
@@ -60,17 +61,103 @@ b_eq(6) = e_dot_0;
 %u = [p_c e_c]'
 
 %Bounds
+% lowerBound = [
+%     repmat([-Inf; -Inf; -pi/6; -Inf; -Inf; -Inf], N, 1);
+%     repmat([-Inf; -Inf], N, 1)];
+% 
+% upperBound = [
+%     repmat([Inf; Inf; pi/6; Inf; Inf; Inf], N, 1);
+%     repmat([Inf; Inf], N, 1)];
+
+
 lowerBound = [
-    repmat([-Inf; -Inf; -pi/6; -Inf; -Inf; -Inf], N, 1);
-    repmat([-Inf; -Inf], N, 1)];
+    repmat([-Inf; -Inf; -Inf; -Inf; -Inf; -Inf], N, 1);
+    repmat([-pi/6; -Inf], N, 1)];
 
 upperBound = [
-    repmat([Inf; Inf; pi/6; Inf; Inf; Inf], N, 1);
-    repmat([Inf; Inf], N, 1)];
+    repmat([Inf; Inf; Inf; Inf; Inf; Inf], N, 1);
+    repmat([pi/6; Inf], N, 1)];
 
 
-z_0 = ones((6+2)*40, 1);
 
-OPTIONS = optimset('Algorithm','sqp');
-z = FMINCON(f, z_0, [], [], A_eq, b_eq, lowerBound, upperBound, @mycon, OPTIONS);
+z_0 = zeros((6+2)*40, 1);
 
+OPTIONS = optimset('Algorithm','active-set');
+z = fmincon(f, z_0, [], [], A_eq, b_eq, lowerBound, upperBound, @mycon_alt, OPTIONS);
+
+
+lambda = z(1:6:N*6);
+r = z(2:6:N*6);
+p = z(3:6:N*6);
+p_dot = z(4:6:N*6);
+e = z(5:6:N*6);
+e_dot = z(6:6:N*6);
+
+p_c = z(N*6 + 1:2:N*8);
+e_c = z(N*6 + 2:2:N*8);
+
+
+Antall = 5/delta_t;
+Nuller = zeros(Antall,1);
+Enere  = ones(Antall,1);
+
+lambda      = [Nuller; lambda; Nuller];
+r           = [Nuller; r; Nuller];
+p           = [Nuller; p; Nuller];
+
+
+x1  = [pi*Enere; x1; Nuller];
+x2  = [Nuller; x2; Nuller];
+x3  = [Nuller; x3; Nuller];
+x4  = [Nuller; x4; Nuller];
+
+t = 0:delta_t:delta_t*(length(u)-1);          
+
+
+% LQR stuff
+
+
+lambda_max = .1;
+r_max = 2;
+p_max = 3;
+p_dot_max = 100000;
+e_max = Inf;
+e_dot_max = Inf;
+
+Q = [1/(lambda_max)^2 0 0 0 0 0;
+     0 1/(r_max)^2 0 0 0 0;
+     0 0 1/(p_max)^2 0 0 0;
+     0 0 0 1/(p_dot_max)^2 0 0
+     0 0 0 0 1/(e_max)^2 0;
+     0 0 0 0 0 1/(e_dot_max)^2
+     ];
+
+%u = [p_c e_c]'
+
+p_c_max = 1;
+e_c_max = 1;
+
+R = [1/(p_c_max)^2 0;
+    0 1/(e_c_max)^2];
+ 
+ %Finding K
+[K, S, E] = dlqr(A,b,Q,R);
+
+
+%x = [lambda r p p_dot e e_dot]'
+%u = [p_c e_c]'
+
+
+
+
+
+% Exporting all the nice data
+optimal_trajectory_data = [lambda, r, p, p_dot, e, e_dot];
+optimal_trajectory.time = t;
+optimal_trajectory.signals.values = optimal_trajectory_data;
+optimal_trajectory.signals.dimension = 141;
+
+u.time = t;
+u.signals.values = [p_c, e_c];
+u.signals.dimension = 141;
+ 

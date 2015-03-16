@@ -22,7 +22,7 @@ joystick_gain_y = 1;
 %%wights
 m_w = 1.795;                        % Mass of the counterweight
 m_h = 1.420;                         % Mass of helicopter
-m_g = 0.012;                        % Effective mass of the helicopter
+m_g = 0.012;  % 0.032                      % Effective mass of the helicopter
 %%Distances
 l_a = 0.625;                         % Distance from elevation axis to helicopter body
 l_h = 0.177;                        % Distance from pitch axis to motor
