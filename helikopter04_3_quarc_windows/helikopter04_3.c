@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter04_3.mdl".
  *
- * Model version              : 1.73
+ * Model version              : 1.76
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Fri Apr 17 11:28:31 2015
+ * C source code generated on : Thu Apr 23 19:57:42 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -228,6 +228,33 @@ void helikopter04_3_output(int_T tid)
     /* Gain: '<S2>/Kalibrer-Pitch' */
     helikopter04_3_B.KalibrerPitch = helikopter04_3_P.KalibrerPitch_Gain *
       rtb_HILReadEncoder_o2;
+
+    /* ToFile: '<Root>/To File' */
+    if (rtmIsMajorTimeStep(helikopter04_3_M)) {
+      if (!(++helikopter04_3_DWork.ToFile_IWORK.Decimation % 1) &&
+          (helikopter04_3_DWork.ToFile_IWORK.Count*2)+1 < 100000000 ) {
+        FILE *fp = (FILE *) helikopter04_3_DWork.ToFile_PWORK.FilePtr;
+        if (fp != (NULL)) {
+          real_T u[2];
+          helikopter04_3_DWork.ToFile_IWORK.Decimation = 0;
+          u[0] = helikopter04_3_M->Timing.t[1];
+          u[1] = helikopter04_3_B.KalibrerElev;
+          if (fwrite(u, sizeof(real_T), 2, fp) != 2) {
+            rtmSetErrorStatus(helikopter04_3_M,
+                              "Error writing to MAT-file elev.mat");
+            return;
+          }
+
+          if (((++helikopter04_3_DWork.ToFile_IWORK.Count)*2)+1 >= 100000000) {
+            (void)fprintf(stdout,
+                          "*** The ToFile block will stop logging data before\n"
+                          "    the simulation has ended, because it has reached\n"
+                          "    the maximum number of elements (100000000)\n"
+                          "    allowed in MAT-file elev.mat.\n");
+          }
+        }
+      }
+    }
   }
 
   /* TransferFcn: '<S2>/Vandring Lavpass' */
@@ -240,14 +267,14 @@ void helikopter04_3_output(int_T tid)
   helikopter04_3_B.Add1 = helikopter04_3_P.Constant1_Value +
     helikopter04_3_B.VandringLavpass;
   if (rtmIsMajorTimeStep(helikopter04_3_M)) {
-    /* ToFile: '<Root>/To File' */
+    /* ToFile: '<Root>/To File1' */
     if (rtmIsMajorTimeStep(helikopter04_3_M)) {
-      if (!(++helikopter04_3_DWork.ToFile_IWORK.Decimation % 1) &&
-          (helikopter04_3_DWork.ToFile_IWORK.Count*2)+1 < 100000000 ) {
-        FILE *fp = (FILE *) helikopter04_3_DWork.ToFile_PWORK.FilePtr;
+      if (!(++helikopter04_3_DWork.ToFile1_IWORK.Decimation % 1) &&
+          (helikopter04_3_DWork.ToFile1_IWORK.Count*2)+1 < 100000000 ) {
+        FILE *fp = (FILE *) helikopter04_3_DWork.ToFile1_PWORK.FilePtr;
         if (fp != (NULL)) {
           real_T u[2];
-          helikopter04_3_DWork.ToFile_IWORK.Decimation = 0;
+          helikopter04_3_DWork.ToFile1_IWORK.Decimation = 0;
           u[0] = helikopter04_3_M->Timing.t[1];
           u[1] = helikopter04_3_B.Add1;
           if (fwrite(u, sizeof(real_T), 2, fp) != 2) {
@@ -256,7 +283,7 @@ void helikopter04_3_output(int_T tid)
             return;
           }
 
-          if (((++helikopter04_3_DWork.ToFile_IWORK.Count)*2)+1 >= 100000000) {
+          if (((++helikopter04_3_DWork.ToFile1_IWORK.Count)*2)+1 >= 100000000) {
             (void)fprintf(stdout,
                           "*** The ToFile block will stop logging data before\n"
                           "    the simulation has ended, because it has reached\n"
@@ -660,10 +687,10 @@ void helikopter04_3_initialize(boolean_T firstTime)
   helikopter04_3_M->Timing.stepSize1 = 0.001;
 
   /* external mode info */
-  helikopter04_3_M->Sizes.checksums[0] = (2614143017U);
-  helikopter04_3_M->Sizes.checksums[1] = (996152973U);
-  helikopter04_3_M->Sizes.checksums[2] = (2204923576U);
-  helikopter04_3_M->Sizes.checksums[3] = (3660220029U);
+  helikopter04_3_M->Sizes.checksums[0] = (1614227619U);
+  helikopter04_3_M->Sizes.checksums[1] = (1508766924U);
+  helikopter04_3_M->Sizes.checksums[2] = (1593572962U);
+  helikopter04_3_M->Sizes.checksums[3] = (3298669355U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -811,6 +838,36 @@ void helikopter04_3_terminate(void)
   {
     FILE *fp = (FILE *) helikopter04_3_DWork.ToFile_PWORK.FilePtr;
     if (fp != (NULL)) {
+      const char *fileName = "elev.mat";
+      if (fclose(fp) == EOF) {
+        rtmSetErrorStatus(helikopter04_3_M, "Error closing MAT-file elev.mat");
+        return;
+      }
+
+      if ((fp = fopen(fileName, "r+b")) == (NULL)) {
+        rtmSetErrorStatus(helikopter04_3_M, "Error reopening MAT-file elev.mat");
+        return;
+      }
+
+      if (rt_WriteMat4FileHeader(fp, 2, helikopter04_3_DWork.ToFile_IWORK.Count,
+           "ans")) {
+        rtmSetErrorStatus(helikopter04_3_M,
+                          "Error writing header for ans to MAT-file elev.mat");
+      }
+
+      if (fclose(fp) == EOF) {
+        rtmSetErrorStatus(helikopter04_3_M, "Error closing MAT-file elev.mat");
+        return;
+      }
+
+      helikopter04_3_DWork.ToFile_PWORK.FilePtr = (NULL);
+    }
+  }
+
+  /* Terminate for ToFile: '<Root>/To File1' */
+  {
+    FILE *fp = (FILE *) helikopter04_3_DWork.ToFile1_PWORK.FilePtr;
+    if (fp != (NULL)) {
       const char *fileName = "travel.mat";
       if (fclose(fp) == EOF) {
         rtmSetErrorStatus(helikopter04_3_M, "Error closing MAT-file travel.mat");
@@ -823,10 +880,10 @@ void helikopter04_3_terminate(void)
         return;
       }
 
-      if (rt_WriteMat4FileHeader(fp, 2, helikopter04_3_DWork.ToFile_IWORK.Count,
-           "travel")) {
+      if (rt_WriteMat4FileHeader(fp, 2, helikopter04_3_DWork.ToFile1_IWORK.Count,
+           "ans")) {
         rtmSetErrorStatus(helikopter04_3_M,
-                          "Error writing header for travel to MAT-file travel.mat");
+                          "Error writing header for ans to MAT-file travel.mat");
       }
 
       if (fclose(fp) == EOF) {
@@ -834,7 +891,7 @@ void helikopter04_3_terminate(void)
         return;
       }
 
-      helikopter04_3_DWork.ToFile_PWORK.FilePtr = (NULL);
+      helikopter04_3_DWork.ToFile1_PWORK.FilePtr = (NULL);
     }
   }
 }
@@ -883,7 +940,7 @@ void MdlInitializeSizes(void)
   helikopter04_3_M->Sizes.numU = (0);  /* Number of model inputs */
   helikopter04_3_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   helikopter04_3_M->Sizes.numSampTimes = (2);/* Number of sample times */
-  helikopter04_3_M->Sizes.numBlocks = (52);/* Number of blocks */
+  helikopter04_3_M->Sizes.numBlocks = (53);/* Number of blocks */
   helikopter04_3_M->Sizes.numBlockIO = (14);/* Number of block outputs */
   helikopter04_3_M->Sizes.numBlockPrms = (158);/* Sum of parameter "widths" */
 }
@@ -1249,6 +1306,26 @@ void MdlStart(void)
 
   /* Start for ToFile: '<Root>/To File' */
   {
+    const char *fileName = "elev.mat";
+    FILE *fp = (NULL);
+    if ((fp = fopen(fileName, "wb")) == (NULL)) {
+      rtmSetErrorStatus(helikopter04_3_M, "Error creating .mat file elev.mat");
+      return;
+    }
+
+    if (rt_WriteMat4FileHeader(fp,2,0,"ans")) {
+      rtmSetErrorStatus(helikopter04_3_M,
+                        "Error writing mat file header to file elev.mat");
+      return;
+    }
+
+    helikopter04_3_DWork.ToFile_IWORK.Count = 0;
+    helikopter04_3_DWork.ToFile_IWORK.Decimation = -1;
+    helikopter04_3_DWork.ToFile_PWORK.FilePtr = fp;
+  }
+
+  /* Start for ToFile: '<Root>/To File1' */
+  {
     const char *fileName = "travel.mat";
     FILE *fp = (NULL);
     if ((fp = fopen(fileName, "wb")) == (NULL)) {
@@ -1256,15 +1333,15 @@ void MdlStart(void)
       return;
     }
 
-    if (rt_WriteMat4FileHeader(fp,2,0,"travel")) {
+    if (rt_WriteMat4FileHeader(fp,2,0,"ans")) {
       rtmSetErrorStatus(helikopter04_3_M,
                         "Error writing mat file header to file travel.mat");
       return;
     }
 
-    helikopter04_3_DWork.ToFile_IWORK.Count = 0;
-    helikopter04_3_DWork.ToFile_IWORK.Decimation = -1;
-    helikopter04_3_DWork.ToFile_PWORK.FilePtr = fp;
+    helikopter04_3_DWork.ToFile1_IWORK.Count = 0;
+    helikopter04_3_DWork.ToFile1_IWORK.Decimation = -1;
+    helikopter04_3_DWork.ToFile1_PWORK.FilePtr = fp;
   }
 
   /* Start for FromWorkspace: '<Root>/From Workspace' */

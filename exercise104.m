@@ -114,7 +114,7 @@ e_c         = [Nuller; e_c; Nuller];
 t = 0:T:T*(length(lambda)-1);          
 
 
-%% LQR stuff
+% LQR stuff
 
 
 lambda_max = 0.25;%.1;

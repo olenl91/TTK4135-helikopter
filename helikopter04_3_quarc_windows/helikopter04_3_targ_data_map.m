@@ -628,8 +628,8 @@
       dworkMap.sections(1) = section;
       clear section
       
-      section.nData     = 17;
-      section.data(17)  = dumData; %prealloc
+      section.nData     = 18;
+      section.data(18)  = dumData; %prealloc
       
 	  ;% helikopter04_3_DWork.HILReadEncoder_PWORK
 	  section.data(1).logicalSrcIdx = 7;
@@ -655,49 +655,53 @@
 	  section.data(6).logicalSrcIdx = 12;
 	  section.data(6).dtTransOffset = 5;
 	
-	  ;% helikopter04_3_DWork.ToWorkspace_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.ToFile1_PWORK.FilePtr
 	  section.data(7).logicalSrcIdx = 13;
 	  section.data(7).dtTransOffset = 6;
 	
-	  ;% helikopter04_3_DWork.FromWorkspace_PWORK.TimePtr
+	  ;% helikopter04_3_DWork.ToWorkspace_PWORK.LoggedData
 	  section.data(8).logicalSrcIdx = 14;
 	  section.data(8).dtTransOffset = 7;
 	
-	  ;% helikopter04_3_DWork.ToWorkspace1_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.FromWorkspace_PWORK.TimePtr
 	  section.data(9).logicalSrcIdx = 15;
 	  section.data(9).dtTransOffset = 8;
 	
-	  ;% helikopter04_3_DWork.Trajectory_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.ToWorkspace1_PWORK.LoggedData
 	  section.data(10).logicalSrcIdx = 16;
 	  section.data(10).dtTransOffset = 9;
 	
-	  ;% helikopter04_3_DWork.Travel_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.Trajectory_PWORK.LoggedData
 	  section.data(11).logicalSrcIdx = 17;
 	  section.data(11).dtTransOffset = 10;
 	
-	  ;% helikopter04_3_DWork.Elevasjon_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.Travel_PWORK.LoggedData
 	  section.data(12).logicalSrcIdx = 18;
 	  section.data(12).dtTransOffset = 11;
 	
-	  ;% helikopter04_3_DWork.Pitch_PWORK_a.LoggedData
+	  ;% helikopter04_3_DWork.Elevasjon_PWORK.LoggedData
 	  section.data(13).logicalSrcIdx = 19;
 	  section.data(13).dtTransOffset = 12;
 	
-	  ;% helikopter04_3_DWork.Vandring_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.Pitch_PWORK_a.LoggedData
 	  section.data(14).logicalSrcIdx = 20;
 	  section.data(14).dtTransOffset = 13;
 	
-	  ;% helikopter04_3_DWork.Bakmotorvolts_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.Vandring_PWORK.LoggedData
 	  section.data(15).logicalSrcIdx = 21;
 	  section.data(15).dtTransOffset = 14;
 	
-	  ;% helikopter04_3_DWork.Frontmotorvolt_PWORK.LoggedData
+	  ;% helikopter04_3_DWork.Bakmotorvolts_PWORK.LoggedData
 	  section.data(16).logicalSrcIdx = 22;
 	  section.data(16).dtTransOffset = 15;
 	
-	  ;% helikopter04_3_DWork.HILWriteAnalog_PWORK
+	  ;% helikopter04_3_DWork.Frontmotorvolt_PWORK.LoggedData
 	  section.data(17).logicalSrcIdx = 23;
 	  section.data(17).dtTransOffset = 16;
+	
+	  ;% helikopter04_3_DWork.HILWriteAnalog_PWORK
+	  section.data(18).logicalSrcIdx = 24;
+	  section.data(18).dtTransOffset = 17;
 	
       nTotData = nTotData + section.nData;
       dworkMap.sections(2) = section;
@@ -707,15 +711,15 @@
       section.data(3)  = dumData; %prealloc
       
 	  ;% helikopter04_3_DWork.HILInitialize_QuadratureModes
-	  section.data(1).logicalSrcIdx = 24;
+	  section.data(1).logicalSrcIdx = 25;
 	  section.data(1).dtTransOffset = 0;
 	
 	  ;% helikopter04_3_DWork.HILInitialize_InitialEICounts
-	  section.data(2).logicalSrcIdx = 25;
+	  section.data(2).logicalSrcIdx = 26;
 	  section.data(2).dtTransOffset = 4;
 	
 	  ;% helikopter04_3_DWork.HILReadEncoder_Buffer
-	  section.data(3).logicalSrcIdx = 26;
+	  section.data(3).logicalSrcIdx = 27;
 	  section.data(3).dtTransOffset = 8;
 	
       nTotData = nTotData + section.nData;
@@ -726,27 +730,31 @@
       section.data(1)  = dumData; %prealloc
       
 	  ;% helikopter04_3_DWork.HILInitialize_Card
-	  section.data(1).logicalSrcIdx = 27;
+	  section.data(1).logicalSrcIdx = 28;
 	  section.data(1).dtTransOffset = 0;
 	
       nTotData = nTotData + section.nData;
       dworkMap.sections(4) = section;
       clear section
       
-      section.nData     = 3;
-      section.data(3)  = dumData; %prealloc
+      section.nData     = 4;
+      section.data(4)  = dumData; %prealloc
       
 	  ;% helikopter04_3_DWork.FromWorkspace1_IWORK.PrevIndex
-	  section.data(1).logicalSrcIdx = 28;
+	  section.data(1).logicalSrcIdx = 29;
 	  section.data(1).dtTransOffset = 0;
 	
 	  ;% helikopter04_3_DWork.ToFile_IWORK.Count
-	  section.data(2).logicalSrcIdx = 29;
+	  section.data(2).logicalSrcIdx = 30;
 	  section.data(2).dtTransOffset = 1;
 	
-	  ;% helikopter04_3_DWork.FromWorkspace_IWORK.PrevIndex
-	  section.data(3).logicalSrcIdx = 30;
+	  ;% helikopter04_3_DWork.ToFile1_IWORK.Count
+	  section.data(3).logicalSrcIdx = 31;
 	  section.data(3).dtTransOffset = 2;
+	
+	  ;% helikopter04_3_DWork.FromWorkspace_IWORK.PrevIndex
+	  section.data(4).logicalSrcIdx = 32;
+	  section.data(4).dtTransOffset = 3;
 	
       nTotData = nTotData + section.nData;
       dworkMap.sections(5) = section;
@@ -778,8 +786,8 @@
   ;%
 
 
-  targMap.checksum0 = 2614143017;
-  targMap.checksum1 = 996152973;
-  targMap.checksum2 = 2204923576;
-  targMap.checksum3 = 3660220029;
+  targMap.checksum0 = 1614227619;
+  targMap.checksum1 = 1508766924;
+  targMap.checksum2 = 1593572962;
+  targMap.checksum3 = 3298669355;
 

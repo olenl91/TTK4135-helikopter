@@ -3,9 +3,9 @@
  *
  * Real-Time Workshop code generation for Simulink model "helikopter04_3.mdl".
  *
- * Model version              : 1.73
+ * Model version              : 1.76
  * Real-Time Workshop version : 7.5  (R2010a)  25-Jan-2010
- * C source code generated on : Fri Apr 17 11:28:31 2015
+ * C source code generated on : Thu Apr 23 19:57:42 2015
  *
  * Target selection: quarc_windows.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -832,6 +832,10 @@ typedef struct {
   } ToFile_PWORK;                      /* '<Root>/To File' */
 
   struct {
+    void *FilePtr;
+  } ToFile1_PWORK;                     /* '<Root>/To File1' */
+
+  struct {
     void *LoggedData;
   } ToWorkspace_PWORK;                 /* '<Root>/To Workspace' */
 
@@ -886,6 +890,11 @@ typedef struct {
     int_T Count;
     int_T Decimation;
   } ToFile_IWORK;                      /* '<Root>/To File' */
+
+  struct {
+    int_T Count;
+    int_T Decimation;
+  } ToFile1_IWORK;                     /* '<Root>/To File1' */
 
   struct {
     int_T PrevIndex;
