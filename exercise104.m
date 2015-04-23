@@ -39,7 +39,7 @@ A = A_c*T + eye(6);
 b = b_c*T;
 
 % inequality constraints
-%see mycon
+%see mycon_alt
 
 % objective function
 myf = @(lambda, p, e) ones(1, N)*(lambda.^2 + q1.*p.^2 + q2.*e.^2); % legg inn lambda_f ledd
@@ -146,10 +146,6 @@ R = [1/(p_c_max)^2 0;
 
 %x = [lambda r p p_dot e e_dot]'
 %u = [p_c e_c]'
-
-
-
-
 
 % Exporting all the nice data
 optimal_trajectory_data = [lambda, r, p, p_dot, e, e_dot];

@@ -1,7 +1,4 @@
 function [c, ceq] = mycon_alt(x)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
-
 % system parameters
 alpha = 0.2;
 beta = 20;

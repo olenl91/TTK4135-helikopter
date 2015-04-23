@@ -1,5 +1,4 @@
-%Exercise 2++
-
+%Exercise 2.3
 %Variables
 T = 0.25;
 q = 1;
@@ -63,27 +62,16 @@ b_eq(2) = r_0;
 b_eq(3) = p_0;
 b_eq(4) = p_dot_0;
 
-%Solvin the QP-problem
+%Solving the QP-problem
 z = quadprog(G, c, A_ieq, b_ieq, A_eq, b_eq, lowerBound, upperBound);
-
-%free space reserved kjetil
-
-
 
 %Plotting
 delta_t = T;
-
 mx = size(A,2);                        % Number of states (number of columns in A)
 mu = size(B,2);                        % Number of inputs(number of columns in B)
-
 M = N;
 
-
-
 u  = [z(N*mx+1:N*mx+M*mu);z(N*mx+M*mu)]; % Control input from solution
-
-length(u)
-
 
 x1 = [x0(1);z(1:mx:N*mx)];              % State x1 from solution
 x2 = [x0(2);z(2:mx:N*mx)];              % State x2 from solution
@@ -118,11 +106,9 @@ ylabel('p')
 subplot(515)
 plot(t,x4),grid
 xlabel('tid (s)'),ylabel('pdot')
-
     
 Nuller = zeros(Antall,4);
 optimal_trajectory_data = [x1,x2,x3, x4];
-
 optimal_trajectory.time = t;
 optimal_trajectory.signals.values = optimal_trajectory_data;
 optimal_trajectory.signals.dimension = 141;
